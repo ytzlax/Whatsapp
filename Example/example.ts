@@ -147,6 +147,7 @@ const startSock = async() => {
 		askForOTP()
 	}
 
+		
 	const sendMessageWTyping = async(msg: AnyMessageContent, jid: string) => {
 		await sock.presenceSubscribe(jid)
 		await delay(500)
@@ -245,7 +246,21 @@ const startSock = async() => {
 						if(!msg.key.fromMe && doReplies) {
 							console.log('replying to', msg.key.remoteJid)
 							await sock!.readMessages([msg.key])
-							await sendMessageWTyping({ text: 'Hello there!' }, msg.key.remoteJid!)
+
+							//Hadar "972534476058@c.us"
+							// the shlishiya "120363169868874877@g.us"
+
+							if (msg.key.remoteJid === "972534476058@c.us") {
+								console.log("************ytzlax*********")
+								await sendMessageWTyping({ text: 'שלום הדר זה אני הבוט' }, msg.key.remoteJid!)
+
+							}
+							if (msg.key.remoteJid === "120363169868874877@g.us") {
+								console.log("************ytzlax*********")
+								await sendMessageWTyping({ text: 'שלום השלישיה' }, msg.key.remoteJid!)
+
+							}
+							//await sendMessageWTyping({ text: 'Hello there!' }, msg.key.remoteJid!)
 						}
 					}
 				}
@@ -315,10 +330,12 @@ const startSock = async() => {
 			const msg = await store.loadMessage(key.remoteJid!, key.id!)
 			return msg?.message || undefined
 		}
-
+		
 		// only if store is present
 		return proto.Message.fromObject({})
+		
 	}
 }
 
 startSock()
+
